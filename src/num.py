@@ -36,7 +36,6 @@ class NUM:
             self.m2 += d*(x - self.mu)
             self.lo = min(x, self.lo)
             self.hi = max(x, self.hi)
-        return self
 
     def mid(self):
         return self.mu
