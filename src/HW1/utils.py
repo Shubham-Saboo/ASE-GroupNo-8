@@ -1,10 +1,9 @@
 import sys
 
-def coerce(s1):
-    def fun(s2):
-        return None if s2 == "nil" else s2 == "true" or (s2 != "false" and s2) 
-    return math.tointeger(s1) or float(s1) or fun(s1.strip())
-
+def coerce(x):
+   try : return ast.literal_eval(x)
+   except Exception: return x.strip()
+   
 def cells(s):
     t = [coerce(s1) for s1 in s.split(",")]
     return t
