@@ -32,4 +32,15 @@ class SYM:
 
     def mid(self):
         return self.mode
+          
+    def div(self, e=0):
+        for v in self.has.values():
+            e -= v / self.n * math.log(v / self.n, 2)
+        return e
+
+    def small(self):
+        return 0
+
+    def like(self, x, prior):
+        return ((self.has[x] or 0) + the.m * prior) / (self.n + the.m)
 
