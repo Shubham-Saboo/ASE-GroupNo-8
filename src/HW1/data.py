@@ -36,13 +36,14 @@ class DATA:
                 self.add(x, fun)
 
     def add(self, t, fun=None):
-        row = t if t.get('cells') else ROW.new(t)
+        row = ROW(t) if type(t) == list else t
+        # row = t if t.get('cells') else ROW.new(t)
         if self.cols:
             if fun:
                 fun(self, row)
             self.rows.append(self.cols.add(row))
         else:
-            self.cols = COLS.new(row)
+            self.cols = COLS(row)
 
     def mid(self, cols=None):
         u = [col.mid() for col in (cols or self.cols.all)]

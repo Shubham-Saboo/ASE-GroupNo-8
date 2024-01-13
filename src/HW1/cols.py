@@ -27,7 +27,7 @@ class COLS:
         self.x, self.y, self.all = [], [], []
         self.klass, self.names = None, row.cells
 
-        for at, txt in enumerate(row.cells, start=1):
+        for at, txt in enumerate(row.cells):
             col = (NUM if txt[0].isalpha() and txt[0].isupper() else SYM)(txt, at)
             self.all.append(col)
 

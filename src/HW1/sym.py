@@ -18,6 +18,7 @@ class SYM:
     def __init__(self, s=" ", n=0):
         self.txt = s
         self.at = n
+        self.n = 0
         self.has = {}
         self.mode = None
         self.most = 0

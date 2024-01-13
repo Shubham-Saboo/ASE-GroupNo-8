@@ -1,8 +1,8 @@
-import sys
+import sys, ast
 
 def coerce(x):
-   try : return ast.literal_eval(x)
-   except Exception: return x.strip()
+    try : return ast.literal_eval(x)
+    except Exception: return x.strip()
    
 def cells(s):
     t = [coerce(s1) for s1 in s.split(",")]
