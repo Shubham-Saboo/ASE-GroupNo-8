@@ -1,8 +1,13 @@
-import sys, ast
+import sys, ast, math, re
 
-def coerce(x):
-    try : return ast.literal_eval(x)
-    except Exception: return x.strip()
+def coerce(s):
+    def fun(s2):
+        return None if s2 == "null" else s2.lower() == "true" or (s2.lower() != "false" and s2)
+
+    try:
+        return float(s)
+    except ValueError:
+        return fun(re.match(r'^\s*(.*\S)', s).group(1)) if isinstance(s, str) else s
    
 def cells(s):
     t = [coerce(s1) for s1 in s.split(",")]
@@ -32,3 +37,9 @@ def settings(s):
         t[full_form] = coerce(default_value)
         opt_dir[short_form] = full_form
     return [t, opt_dir]
+
+def round(n, nPlaces = 2):
+    if type(n) == str:
+        return n
+    mult = 10**nPlaces
+    return math.floor(float(n)*mult + 0.5) / mult 

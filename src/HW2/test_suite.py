@@ -3,7 +3,7 @@ import math
 from num import NUM
 from sym import SYM
 from data import DATA
-from utils import coerce, settings, cells, csv, round, cli
+from utils import coerce, settings, cells, csv, round
 
 
 class UtilityTestSuite:

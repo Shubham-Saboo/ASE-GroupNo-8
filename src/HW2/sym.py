@@ -13,7 +13,7 @@ Lua Code:
 
     function SYM:mid() return self.mode end
 '''
-
+import math
 class SYM:
     def __init__(self, s=" ", n=0):
         self.txt = s
