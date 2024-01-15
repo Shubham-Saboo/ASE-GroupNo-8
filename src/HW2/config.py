@@ -1,33 +1,21 @@
-# config.py
+"""
+mylo: to understand "it",  cut "it" up, then seek patterns in the pieces. E.g. here
+we use cuts for multi- objective, semi- supervised, rule-based explanation.
+(c) Tim Menzies <timm@ieee.org>, BSD-2 license
 
-class Config:
-    """
-    Configuration settings for the application.
-    """
-
-    def __init__(self):
-        # Default configuration values
-        self.cohen = 0.35              # Small effect size
-        self.file = "../data/diabetes.csv"  # Default CSV data file name
-        self.help = False              # Show help
-        self.k = 1                     # Low class frequency kludge
-        self.m = 2                     # Low attribute frequency kludge
-        self.seed = 31210              # Random number seed
-        self.todo = "help"             # Start up action
-
-    def __str__(self):
-        return f"""Configurations:
-    Cohen: {self.cohen}
-    File: {self.file}
-    Help: {self.help}
-    K: {self.k}
-    M: {self.m}
-    Seed: {self.seed}
-    Todo: {self.todo}
-    """
-
-# Usage example
-if __name__ == "__main__":
-    config = Config()
-    print(config)
-
+OPTIONS:
+  -b --bins   initial number of bins      = 16
+  -B --Bootstraps number of bootstraps    = 512
+  -c --cohen  parametric small delta      = .35
+  -C --Cliffs  non-parametric small delta = 0.2385 
+  -f --file   where to read data          = "../data/auto93.csv"
+  -F --Far    distance to  distant rows   = .925
+  -g --go     start up action             = "help"
+  -h --help   show help                   = False
+  -H --Halves #examples used in halving   = 512
+  -p --p      distance coefficient        = 2
+  -s --seed   random number seed          = 1234567891
+  -m --min    minimum size               = .5
+  -r --rest   |rest| is |best|*rest        = 3
+  -T --Top    max. good cuts to explore   = 10 
+"""
