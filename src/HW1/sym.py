@@ -40,7 +40,3 @@ class SYM:
 
     def small(self):
         return 0
-
-    def like(self, x, prior):
-        return ((self.has[x] or 0) + the.m * prior) / (self.n + the.m)
-
