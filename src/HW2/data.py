@@ -1,4 +1,6 @@
 from row import ROW
+from num import NUM
+from sym import SYM
 from cols import COLS
 from utils import *;
 
@@ -37,7 +39,6 @@ class DATA:
 
     def add(self, t, fun=None):
         row = ROW(t) if type(t) == list else t
-        # row = t if t.get('cells') else ROW.new(t)
         if self.cols:
             if fun:
                 fun(self, row)
@@ -48,3 +49,25 @@ class DATA:
     def mid(self, cols=None):
         u = [col.mid() for col in (cols or self.cols.all)]
         return ROW.new(u)
+
+    # def stats(data):
+    #     for col in data.cols.all:
+    #         if isinstance(col, NUM):
+    #             mean = col.mid()
+    #             print(f"Mean for numerical class '{col.txt}': {mean:.2f}")
+    #         elif isinstance(col, SYM):
+    #             mode = col.mid()
+    #             print(f"Mode for symbolic class '{col.txt}': {mode}")
+
+    def stats(data):
+        statistics = {}
+
+        for col in data.cols.all:
+            if isinstance(col, NUM):
+                mean = col.mid()
+                statistics[f"{col.txt}"] = round(mean, 2)
+            elif isinstance(col, SYM):
+                mode = col.mid()
+                statistics[f"{col.txt}"] = mode
+
+        return statistics
