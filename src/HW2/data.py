@@ -50,18 +50,10 @@ class DATA:
         u = [col.mid() for col in (cols or self.cols.all)]
         return ROW.new(u)
 
-    # def stats(data):
-    #     for col in data.cols.all:
-    #         if isinstance(col, NUM):
-    #             mean = col.mid()
-    #             print(f"Mean for numerical class '{col.txt}': {mean:.2f}")
-    #         elif isinstance(col, SYM):
-    #             mode = col.mid()
-    #             print(f"Mode for symbolic class '{col.txt}': {mode}")
-
     def stats(data):
         statistics = {}
-
+        total_rows = max(col.n for col in data.cols.all)
+        statistics[".N"] = total_rows
         for col in data.cols.all:
             if isinstance(col, NUM):
                 mean = col.mid()
