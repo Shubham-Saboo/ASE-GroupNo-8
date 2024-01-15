@@ -22,3 +22,13 @@ def csv(src):
         s = src.readline().strip()
     src.close()
     return
+
+def settings(s):
+    t = {}
+    opt_dir = {}
+    options = re.findall(r'-(\w+)\s+--(\w+)\s+.*=\s*(\S+)', s)
+    for option in options:
+        short_form, full_form, default_value = option
+        t[full_form] = coerce(default_value)
+        opt_dir[short_form] = full_form
+    return [t, opt_dir]
