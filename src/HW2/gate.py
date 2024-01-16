@@ -1,7 +1,7 @@
 from utils import *
 from data import DATA
 from config import help_str
-from test_suite import TestSuite
+from test import Test
 
 if __name__ == "__main__":
     t = settings(help_str)
@@ -10,18 +10,18 @@ if __name__ == "__main__":
         print("You can refer to the following help: ")
         print(help_str)
     else:
-        ts = TestSuite()
+        ts = Test()
 
-        if t['run_tc'] == "all":
+        if t['run_test'] == "all":
             print("Running all test cases!")
             ts.run_tests()
-        elif t['run_tc'] != "None":
-            print(f"Running test {t['run_tc']}")
+        elif t['run_test'] != "None":
+            print(f"Running test {t['run_test']}")
             try:
-                tests[t['run_tc']]()
-                print(f"Test {t['run_tc']} passed.")
+                tests[t['run_test']]()
+                print(f"Test {t['run_test']} passed.")
             except AssertionError as e:
-                print(f"Test {t['run_tc']} failed: {e}")
+                print(f"Test {t['run_test']} failed: {e}")
 
         data = DATA(t['file'])
         print(data.stats())
