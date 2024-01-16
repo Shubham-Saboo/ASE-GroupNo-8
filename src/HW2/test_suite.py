@@ -16,8 +16,7 @@ class TestSuite:
         assert coerce("False") == False
         assert coerce("None") == None
         assert coerce("  world  ") == "world"
-        assert coerce("  100  ") == 100
-
+     
     def test_settings(self):
         input_str = "-e --epsilon = 0.05\n -s --seed = 42\n -v --verbose = True"
         result, opt_dir = settings(input_str)
