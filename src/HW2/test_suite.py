@@ -89,7 +89,7 @@ class TestSuite:
         sym_obj = SYM()
         sym_obj.add("x")
         sym_obj.add("y")
-        assert sym_obj.mid() == "a"
+        assert sym_obj.mid() == "x"
 
     def test_div_sym(self):
         sym_obj = SYM()
