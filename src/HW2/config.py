@@ -1,4 +1,6 @@
 """
+(c) 2023, Tim Menzies, BSD-2
+
 USAGE:
   python gate.py [OPTIONS]
 
@@ -10,6 +12,16 @@ OPTIONS:
   -m --m        low attribute frequency kludge  = 2
   -s --seed     random number seed              = 31210
   -t --run_tc   run test-cases                  = None
+
+LIST OF TESTS:
+  all test cases:
+    'all'
+  individual test cases:  
+    'coerce': ts.test_coerce_with_loop,
+    'cells': ts.test_cells_random_data,
+    'round': ts.test_round_various_numbers,
+    'num_mid': ts.test_add_and_mid_num,
+    'sym_mid': ts.test_add_and_mid_sym
 """
 
 help_str = __doc__

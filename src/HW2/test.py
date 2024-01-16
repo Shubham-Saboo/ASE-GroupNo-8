@@ -34,13 +34,12 @@ class Test:
         for num in [10, 20, 30, 40, 50]:
             num_obj.add(num)
         assert num_obj.mid() == 30
-
-    def test_div_sym_with_random_data(self):
+    
+    def test_add_and_mid_sym(self):
         sym_obj = SYM()
-        choices = ['a', 'b', 'c', 'd', 'e']
-        for _ in range(10):
-            sym_obj.add(random.choice(choices))
-        assert 0 <= sym_obj.div() <= math.sqrt(len(choices))
+        for x in ["a","a","a","b","b","c","d"]:
+            sym_obj.add(x)
+        return sym_obj.mid() == "a"
 
     def _run_test(self, test_func, test_name):
         try:

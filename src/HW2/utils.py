@@ -4,10 +4,10 @@ def coerce(s):
     def fun(s2):
         return None if s2 == "null" else s2.lower() == "true" or (s2.lower() != "false" and s2)
     try:
-        return float(s)
+        return float(s) if s is not None else None
     except ValueError:
         return fun(re.match(r'^\s*(.*\S)', s).group(1)) if isinstance(s, str) else s
-   
+
 def cells(s):
     t = [coerce(s1) for s1 in s.split(",")]
     return t
@@ -33,12 +33,18 @@ def settings(s):
     if "--help" in options or "-h" in options:
         t["help"] = True
         return t
-    options_dict = {options[i]: options[i+1] for i in range(0, len(options), 2)}
+
+    options_dict = {}
+    for i in range(0, len(options), 2):
+        opt = options[i]
+        val = options[i + 1] if i + 1 < len(options) else None
+        options_dict[opt] = val
+
     for opt, val in options_dict.items():
         key = opt[2:] if opt.startswith('--') else opt_dir[opt[1:]]
         t[key] = coerce(val)
-    return t
 
+    return t
 
 def round(n, nPlaces = 2):
     if type(n) == str or n is None:
