@@ -5,8 +5,7 @@ from test_suite import TestSuite
 
 
 if __name__ == "__main__":
-    t, opt_dir = settings(help_str)
-    t = cli(t, opt_dir)
+    t = settings(help_str)
     if(t['help']):
         print("You can refer the following help: ")
         print(help_str)

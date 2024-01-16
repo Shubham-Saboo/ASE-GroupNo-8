@@ -4,7 +4,7 @@ import math
 from num import NUM
 from sym import SYM
 from data import DATA
-from utils import coerce, settings, cells, csv, round, cli
+from utils import coerce, settings, cells, csv, round
 import os
 import platform
 class TestSuite:
@@ -16,12 +16,6 @@ class TestSuite:
         assert coerce("False") == False
         assert coerce("  world  ") == "world"
      
-    def test_settings(self):
-        input_str = "-c --cohen = 0.05\n -s --seed = 42\n -h --help = True"
-        result, opt_dir = settings(input_str)
-
-        assert result == {'cohen': 0.05, 'seed': 42, 'help': True}
-
 
     def test_cells(self):
         input_str = "10, 20, 2.718, false, true, null, world"

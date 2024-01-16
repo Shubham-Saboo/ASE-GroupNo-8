@@ -3,7 +3,6 @@ import sys, ast, math, re
 def coerce(s):
     def fun(s2):
         return None if s2 == "null" else s2.lower() == "true" or (s2.lower() != "false" and s2)
-
     try:
         return float(s)
     except ValueError:
@@ -14,51 +13,35 @@ def cells(s):
     return t
 
 def csv(src):
-    i = 0
     try:
         src = sys.stdin if src == "-" else open(src, 'r')
     except FileNotFoundError:
-        raise FileNotFoundError(f"File is either not CSV or given path does not exist: {src}")
-
-    s = src.readline().strip()
-    while s:
-        i += 1
-        yield i, cells(s)
-        s = src.readline().strip()
-    src.close()
-    return
+        raise FileNotFoundError(f"File not found: {src}")
+    with src:
+        for i, line in enumerate(src, start=1):
+            yield i, cells(line.strip())
 
 def settings(s):
     t = {}
     opt_dir = {}
-    options = re.findall(r'-(\w+)\s+--(\w+)\s+.*=\s*(\S+)', s)
-    for option in options:
-        short_form, full_form, default_value = option
+    opts = re.findall(r'-(\w+)\s+--(\w+)\s+.*=\s*(\S+)', s)
+    for short_form, full_form, default_value in opts:
         t[full_form] = coerce(default_value)
         opt_dir[short_form] = full_form
-    return [t, opt_dir]
+
+    options = sys.argv[1:]
+    if "--help" in options or "-h" in options:
+        t["help"] = True
+        return t
+    options_dict = {options[i]: options[i+1] for i in range(0, len(options), 2)}
+    for opt, val in options_dict.items():
+        key = opt[2:] if opt.startswith('--') else opt_dir[opt[1:]]
+        t[key] = coerce(val)
+    return t
+
 
 def round(n, nPlaces = 2):
-    if type(n) == str:
+    if type(n) == str or n is None:
         return n
     mult = 10**nPlaces
     return math.floor(float(n)*mult + 0.5) / mult 
-
-def cli(t, opt_dir):
-    options_dict = {}
-    options = sys.argv[1:]
-
-    if("--help" in options or "-h" in options):
-        t["help"]=True
-        return t
-
-    for i in range(0, len(options), 2):
-        options_dict[options[i]] = options[i+1]
-
-    for opt,val in options_dict.items():
-        if opt.startswith('--'):
-            t[opt[2:]] = coerce(val)
-        elif opt.startswith('-'):
-            t[opt_dir[opt[1:]]] = coerce(val)
-
-    return t

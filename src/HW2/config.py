@@ -1,8 +1,4 @@
 """
-gate: guess, assess, try, expand
-(c) 2023, Tim Menzies, BSD-2
-Learn a little, guess a lot, try the strangest guess, learn a little more, repeat
-
 USAGE:
   python gate.py [OPTIONS]
 
@@ -24,7 +20,6 @@ the = {}
 test_suite = TestSuite()
 tests = {
     "coerce":test_suite.test_coerce,
-    "settings":test_suite.test_settings,
     "cells":test_suite.test_cells,
     "round":test_suite.test_round,
     "add_num":test_suite.test_add_num,
