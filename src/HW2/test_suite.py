@@ -8,96 +8,101 @@ from utils import coerce, settings, cells, csv, round, cli
 import os
 import platform
 class TestSuite:
-
+    ]
     def test_coerce(self):
-        assert coerce("42") == 42
-        assert coerce("3.14") == 3.14
-        assert coerce("true") == True
-        assert coerce("false") == False
-        assert coerce("null") == None
-        assert coerce("  hello  ") == "hello"
-        assert coerce("  42  ") == 42
+        assert coerce("100") == 100
+        assert coerce("2.718") == 2.718
+        assert coerce("True") == True
+        assert coerce("False") == False
+        assert coerce("None") == None
+        assert coerce("  world  ") == "world"
+        assert coerce("  100  ") == 100
 
     def test_settings(self):
-        input_str = "-c --cohen = 0.35\n -f --file = data.csv\n -h --help = False"
+        input_str = "-e --epsilon = 0.05\n -s --seed = 42\n -v --verbose = True"
         result, opt_dir = settings(input_str)
 
-        assert result == {'cohen': 0.35, 'file': 'data.csv', 'help': False}
+        assert result == {'epsilon': 0.05, 'seed': 42, 'verbose': True}
+
 
     def test_cells(self):
-        input_str = "1, 2, 3.14, true, false, null, hello"
+        input_str = "10, 20, 2.718, false, true, none, world"
         result = cells(input_str)
-        assert result == [1, 2, 3.14, True, False, None, "hello"]
+        assert result == [10, 20, 2.718, False, True, None, "world"]
+
 
     def test_round(self):
-        assert round(3.14159, 2) == 3.14
-        assert round(42) == 42
-        assert round("hello") == "hello"
-        assert round(True) == True
-        assert round(False) == False
+        assert round(2.71828, 3) == 2.718
+        assert round(100) == 100
+        assert round("world") == "world"
+        assert round(None) == None
+
 
     def test_add_num(self):
         num_obj = NUM()
-        num_obj.add(5)
+        num_obj.add(15)
         assert num_obj.n == 1
-        assert num_obj.mu == 5
+        assert num_obj.mu == 15
         assert num_obj.m2 == 0
-        assert num_obj.lo == 5
-        assert num_obj.hi == 5
+        assert num_obj.lo == 15
+        assert num_obj.hi == 15
 
-        num_obj.add(10)
+        num_obj.add(5)
         assert num_obj.n == 2
-        assert num_obj.mu == 7.5
-        assert num_obj.m2 == 12.5
+        assert num_obj.mu == 10
+        assert num_obj.m2 == 50
         assert num_obj.lo == 5
-        assert num_obj.hi == 10
+        assert num_obj.hi == 15
+
 
     def test_mid_num(self):
         num_obj = NUM()
+        num_obj.add(15)
         num_obj.add(5)
-        num_obj.add(10)
-        assert num_obj.mid() == 7.5
+        assert num_obj.mid() == 10
+
 
     def test_div_num(self):
         num_obj = NUM()
+        num_obj.add(15)
         num_obj.add(5)
-        num_obj.add(10)
-        assert num_obj.div() == (12.5 / 1)**0.5
+        assert num_obj.div() == (50 / 1)**0.5
+
 
     def test_add_sym(self):
         sym_obj = SYM()
-        sym_obj.add("a")
+        sym_obj.add("x")
         assert sym_obj.n == 1
-        assert sym_obj.has == {"a": 1}
-        assert sym_obj.mode == "a"
+        assert sym_obj.has == {"x": 1}
+        assert sym_obj.mode == "x"
         assert sym_obj.most == 1
 
-        sym_obj.add("b")
-        sym_obj.add("a")
-        assert sym_obj.n == 3
-        assert sym_obj.has == {"a": 2, "b": 1}
-        assert sym_obj.mode == "a"
-        assert sym_obj.most == 2
+        sym_obj.add("y")
+        sym_obj.add("x")
+        sym_obj.add("x")
+        assert sym_obj.n == 4
+        assert sym_obj.has == {"x": 3, "y": 1}
+        assert sym_obj.mode == "x"
+        assert sym_obj.most == 3
+
 
     def test_mid_sym(self):
         sym_obj = SYM()
-        sym_obj.add("a")
-        sym_obj.add("b")
+        sym_obj.add("x")
+        sym_obj.add("y")
         assert sym_obj.mid() == "a"
 
     def test_div_sym(self):
         sym_obj = SYM()
-        sym_obj.add("a")
-        sym_obj.add("b")
-        sym_obj.add("a")
-        sym_obj.add("c")
+        sym_obj.add("x")
+        sym_obj.add("x")
+        sym_obj.add("y")
+        sym_obj.add("z")
         assert math.isclose(sym_obj.div(), 1.5)
 
     def test_small_sym(self):
         sym_obj = SYM()
         assert sym_obj.small() == 0
-
-
 
     def _run_test(self, test_func, test_name):
         try:
