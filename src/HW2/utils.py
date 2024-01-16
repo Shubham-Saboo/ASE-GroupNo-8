@@ -43,3 +43,22 @@ def round(n, nPlaces = 2):
         return n
     mult = 10**nPlaces
     return math.floor(float(n)*mult + 0.5) / mult 
+
+def cli(t, opt_dir):
+    options_dict = {}
+    options = sys.argv[1:]
+
+    if("--help" in options or "-h" in options):
+        t["help"]=True
+        return t
+
+    for i in range(0, len(options), 2):
+        options_dict[options[i]] = options[i+1]
+
+    for opt,val in options_dict.items():
+        if opt.startswith('--'):
+            t[opt[2:]] = coerce(val)
+        elif opt.startswith('-'):
+            t[opt_dir[opt[1:]]] = coerce(val)
+
+    return t
