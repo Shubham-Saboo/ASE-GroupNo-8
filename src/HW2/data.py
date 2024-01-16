@@ -60,6 +60,6 @@ class DATA:
                 statistics[f"{col.txt}"] = round(mean, 2)
             elif isinstance(col, SYM):
                 mode = col.mid()
-                statistics[f"{col.txt}"] = mode
+                statistics[f"{col.txt}"] = int(mode) if type(mode) == float else mode
 
         return statistics
