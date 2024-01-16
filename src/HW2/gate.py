@@ -1,6 +1,6 @@
 from utils import *
 from data import DATA
-from config import help_str, tests
+from config import help_str
 from test_suite import TestSuite
 
 
