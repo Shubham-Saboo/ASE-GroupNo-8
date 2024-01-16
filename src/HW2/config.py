@@ -22,7 +22,7 @@ help_str = __doc__
 
 the = {}
 test_suite = TestSuite()
-egs = {
+tests = {
     "coerce":test_suite.test_coerce,
     "settings":test_suite.test_settings,
     "cells":test_suite.test_cells,
