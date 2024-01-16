@@ -18,10 +18,10 @@ class TestSuite:
         assert coerce("  world  ") == "world"
      
     def test_settings(self):
-        input_str = "-e --epsilon = 0.05\n -s --seed = 42\n -v --verbose = True"
+        input_str = "-c --cohen = 0.05\n -s --seed = 42\n -h --help = True"
         result, opt_dir = settings(input_str)
 
-        assert result == {'epsilon': 0.05, 'seed': 42, 'verbose': True}
+        assert result == {'cohen': 0.05, 'seed': 42, 'help': True}
 
 
     def test_cells(self):
