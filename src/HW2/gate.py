@@ -22,13 +22,13 @@ if __name__ == "__main__":
         elif t['run_tc'] == "all":
             print("Running all test cases!")
             ts.run_tests()
-        elif t['run_tc'] != "None":
-            print(f"Running test {t['run_tc']}")
+        elif t['run_test'] != "None":
+            print(f"Running test {t['run_test']}")
             try:
-                tests[t['run_tc']]()
-                print(f"Test {t['run_tc']} passed.")
+                tests[t['run_test']]()
+                print(f"Test {t['run_test']} passed.")
             except AssertionError as e:
-                print(f"Test {t['run_tc']} failed: {e}")
+                print(f"Test {t['run_test']} failed: {e}")
 
         data = DATA(t['file'])
         print(data.stats())
