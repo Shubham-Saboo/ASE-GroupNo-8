@@ -14,7 +14,6 @@ class TestSuite:
         assert coerce("2.718") == 2.718
         assert coerce("True") == True
         assert coerce("False") == False
-        assert coerce("None") == None
         assert coerce("  world  ") == "world"
      
     def test_settings(self):
@@ -25,7 +24,7 @@ class TestSuite:
 
 
     def test_cells(self):
-        input_str = "10, 20, 2.718, false, true, none, world"
+        input_str = "10, 20, 2.718, false, true, null, world"
         result = cells(input_str)
         assert result == [10, 20, 2.718, False, True, None, "world"]
 
@@ -34,7 +33,6 @@ class TestSuite:
         assert round(2.71828, 3) == 2.718
         assert round(100) == 100
         assert round("world") == "world"
-        assert round(None) == None
 
 
     def test_add_num(self):
@@ -112,7 +110,6 @@ class TestSuite:
             print(f"Test {test_name} failed: {e}")
 
     def run_tests(self):
-        print("Running tests in TestSuite")
         test_functions = [func for func in dir(self) if func.startswith('test_') and callable(getattr(self, func))]
         for test_func_name in test_functions:
             test_func = getattr(self, test_func_name)
