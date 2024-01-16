@@ -8,7 +8,7 @@ from utils import coerce, settings, cells, csv, round, cli
 import os
 import platform
 class TestSuite:
-    ]
+ 
     def test_coerce(self):
         assert coerce("100") == 100
         assert coerce("2.718") == 2.718
