@@ -29,7 +29,7 @@ class NUM:
         self.heaven = 0 if (s or "").endswith("-") else 1
 
     def add(self, x):
-        if x != "?":
+        if x != "?" and isinstance(x, (int, float)):
             self.n += 1
             d = x - self.mu
             self.mu += d/self.n

@@ -6,7 +6,7 @@ USAGE:
 
 OPTIONS:
   -c --cohen    small effect size               = .35
-  -f --file     csv data file name              = ./data/auto93.csv
+  -f --file     csv data file name              = ./data/diabetes.csv
   -h --help     show help                       = False
   -k --k        low class frequency kludge      = 1
   -m --m        low attribute frequency kludge  = 2
@@ -25,3 +25,5 @@ LIST OF TESTS:
 """
 
 help_str = __doc__
+
+the = {'k': 1, 'm': 2}

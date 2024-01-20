@@ -38,7 +38,7 @@ class DATA:
                 self.add(x, fun)
 
     def add(self, t, fun=None):
-        row = ROW(t) if type(t) == list else t
+        row = t if isinstance(t, ROW) else ROW(t)
         if self.cols:
             if fun:
                 fun(self, row)

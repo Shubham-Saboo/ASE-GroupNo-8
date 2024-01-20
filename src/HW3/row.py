@@ -25,6 +25,7 @@ class ROW:
         n, n_hypotheses = 0, 0
 
         for k, data in enumerate(datas, start=1):
+            print(data)
             n += len(data.rows)
             n_hypotheses += 1
 
