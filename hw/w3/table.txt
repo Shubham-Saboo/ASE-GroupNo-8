@@ -1,30 +1,30 @@
-+-----------------------------+----------------+------------+
-|      Diabetes Dataset       |                |            |
-+-----------------------------+----------------+------------+
-| Class                       | No. of records | Percentage |
-| Negative                    | 500            | 65.1       |
-| Positive                    | 268            | 34.9       |
-+-----------------------------+----------------+------------+
-|      Soybean Dataset        |                |            |
-+-----------------------------+----------------+------------+
-| Class                       | No. of records | Percentage |
-| brown-spot                  | 92             | 13.47      |
-| frog-eye-leaf-spot          | 91             | 13.32      |
-| alternarialeaf-spot         | 91             | 13.32      |
-| phytophthora-rot            | 88             | 12.88      |
-| brown-stem-rot              | 44             | 6.44       |
-| anthracnose                 | 44             | 6.44       |
-| diaporthe-stem-canker       | 20             | 2.93       |
-| purple-seed-stain           | 20             | 2.93       |
-| phyllosticta-leaf-spot      | 20             | 2.93       |
-| bacterial-pustule           | 20             | 2.93       |
-| charcoal-rot                | 20             | 2.93       |
-| bacterial-blight            | 20             | 2.93       |
-| downy-mildew                | 20             | 2.93       |
-| powdery-mildew              | 20             | 2.93       |
-| rhizoctonia-root-rot        | 20             | 2.93       |
-| 2-4-d-injury                | 16             | 2.34       |
-| diaporthe-pod-&-stem-blight | 15             | 2.20       |
-| cyst-nematode               | 14             | 2.05       |
-| herbicide-injury            | 8              | 1.17       |
-+-----------------------------+----------------+------------+
++----------+-------+------------+
+|  Class   | Count | Percentage |
++----------+-------+------------+
+| negative |  500  |   65.10%   |
+| positive |  268  |   34.90%   |
++----------+-------+------------+
+
++------------------------------+-------+------------+
+|            Class             | Count | Percentage |
++------------------------------+-------+------------+
+|          brown-spot          |   92  |   13.47%   |
+|      frog-eye-leaf-spot      |   91  |   13.32%   |
+|      alternarialeaf-spot     |   91  |   13.32%   |
+|       phytophthora-rot       |   88  |   12.88%   |
+|        brown-stem-rot        |   44  |   6.44%    |
+|          anthracnose         |   44  |   6.44%    |
+|     diaporthe-stem-canker    |   20  |   2.93%    |
+|       purple-seed-stain      |   20  |   2.93%    |
+|    phyllosticta-leaf-spot    |   20  |   2.93%    |
+|       bacterial-pustule      |   20  |   2.93%    |
+|         charcoal-rot         |   20  |   2.93%    |
+|       bacterial-blight       |   20  |   2.93%    |
+|         downy-mildew         |   20  |   2.93%    |
+|        powdery-mildew        |   20  |   2.93%    |
+|     rhizoctonia-root-rot     |   20  |   2.93%    |
+|         2-4-d-injury         |   16  |   2.34%    |
+|  diaporthe-pod-&-stem-blight |   15  |   2.20%    |
+|         cyst-nematode        |   14  |   2.05%    |
+|       herbicide-injury       |   8   |   1.17%    |
++------------------------------+-------+------------+
