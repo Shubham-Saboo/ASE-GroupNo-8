@@ -14,6 +14,8 @@ Lua Code:
     function SYM:mid() return self.mode end
 '''
 import math
+from config import the
+
 class SYM:
     def __init__(self, s=" ", n=0):
         self.txt = s
@@ -42,4 +44,4 @@ class SYM:
         return 0
 
     def like(self, x, prior):
-        return ((self.has.get(x, 0) or 0) + the.m * prior) / (self.n + the.m)
+        return ((self.has.get(x, 0) or 0) + the['m'] * prior) / (self.n + the['m'])
