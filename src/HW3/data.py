@@ -34,8 +34,8 @@ class DATA:
             for _, x in csv(src):
                 self.add(x, fun)
         else:
-            for _, x in enumerate(src):
-                self.add(x, fun)
+            # for _, x in enumerate(src):
+            self.add(src, fun)
 
     def add(self, t, fun=None):
         row = t if isinstance(t, ROW) else ROW(t)

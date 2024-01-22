@@ -16,6 +16,7 @@ Lua Code:
 
     function NUM:mid() return self.mu end
 '''
+import math
 
 class NUM:
     def __init__(self, s=" ", n=0):
@@ -43,7 +44,7 @@ class NUM:
     def div(self):
         return 0 if self.n < 2 else (self.m2 / (self.n - 1)) ** 0.5
 
-    def like(self, x):
+    def like(self, x, prior):
         mu, sd = self.mid(), (self.div() + 1E-30)
         nom = math.exp(-0.5 * ((x - mu) ** 2) / (sd ** 2))
         denom = (sd * 2.5 + 1E-30)

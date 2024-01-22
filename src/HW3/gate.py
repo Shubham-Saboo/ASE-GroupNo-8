@@ -33,23 +33,23 @@ if __name__ == "__main__":
         data = DATA(t['file'])
         # print(data.stats())
 
-        def learn(data, row, my, n_hypotheses, most, tmp, out):
+        def learn(data, row, my):
             my['n'] += 1
             kl = row.cells[data.cols.klass.at]
             if my['n'] > 10:
                 my['tries'] += 1
-                my['acc'] += 1 if kl == row.likes(my['datas'], my['n'], n_hypotheses, most, tmp, out)[0] else 0
+                my['acc'] += 1 if kl == row.likes(my['datas'])[0] else 0
             my['datas'][kl] = my['datas'].get(kl, DATA(data.cols.names))
             my['datas'][kl].add(row)
 
 
         def bayes():
             wme = {'acc': 0, 'datas': {}, 'tries': 0, 'n': 0}
-            n_hypotheses, most, tmp, out = 0, None, None, None  # Add these variables
-            DATA(t['file'], lambda data, t: learn(data, t, wme, n_hypotheses, most, tmp, out))
-            accuracy = wme['acc'] / wme['tries']
+            # n_hypotheses, most, tmp, out = 0, None, None, None  # Add these variables
+            DATA(t['file'], lambda data, t: learn(data, t, wme))
+            accuracy = (wme['acc'] / wme['tries'])*100
             print(accuracy)
-            return accuracy
+
 
 
         bayes()
