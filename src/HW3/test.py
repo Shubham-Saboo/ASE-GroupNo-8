@@ -3,9 +3,11 @@ import io
 import math
 import random
 from num import NUM
+from row import ROW
 from sym import SYM
 from data import DATA
 from utils import coerce, settings, cells, csv, round
+from algo import learn, bayes, km
 import os
 import platform
 
@@ -40,6 +42,20 @@ class Test:
         for x in ["a","a","a","b","b","c","d"]:
             sym_obj.add(x)
         return sym_obj.mid() == "a"
+    
+    def test_div_sym(self):
+        sym_obj = SYM()
+        sym_obj.add("a")
+        sym_obj.add("b")
+        sym_obj.add("a")
+        sym_obj.add("c")
+        assert math.isclose(sym_obj.div(), 1.5)
+    
+    def test_div_num(self):
+        num_obj = NUM()
+        num_obj.add(5)
+        num_obj.add(10)
+        assert num_obj.div() == (12.5 / 1)**0.5 
 
     def _run_test(self, test_func, test_name):
         try:
@@ -52,7 +68,7 @@ class Test:
         test_functions = [func for func in dir(self) if func.startswith('test_') and callable(getattr(self, func))]
         for test_func_name in test_functions:
             test_func = getattr(self, test_func_name)
-            self._run_test(test_func, test_func_name)        
+            self._run_test(test_func, test_func_name) 
 
 def set_environment_variable(variable_name, value):
     system_platform = platform.system()
