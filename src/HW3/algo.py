@@ -1,5 +1,6 @@
 from data import DATA
-from config import the 
+from config import the
+
 def learn(data, row, my):
     my['n'] += 1
     kl = row.cells[data.cols.klass.at]
