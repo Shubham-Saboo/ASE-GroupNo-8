@@ -48,7 +48,7 @@ if __name__ == "__main__":
             # n_hypotheses, most, tmp, out = 0, None, None, None  # Add these variables
             DATA(t['file'], lambda data, t: learn(data, t, wme))
             accuracy = (wme['acc'] / wme['tries'])*100
-            print(f'The accuracy for the dataset {t["file"].split("/")[2]} is {accuracy:.2f}%')
+            print(f'The bayes function accuracy for the dataset {t["file"].split("/")[2]} is {accuracy:.2f}%')
 
         def km():
             best_accuracy = 0
@@ -73,6 +73,8 @@ if __name__ == "__main__":
                             best_k, best_m = k, m
 
             print(f'The best combination is: k = {best_k}, m = {best_m}, with accuracy {best_accuracy:.2f}%')
+
         bayes()
+        print("\nThe accuracies calculated using different values of k and m are:")
         km()
         
