@@ -10,7 +10,6 @@ def learn(data, row, my):
     my['datas'][kl] = my['datas'].get(kl, DATA(data.cols.names))
     my['datas'][kl].add(row)
 
-
 def bayes(t):
     wme = {'acc': 0, 'datas': {}, 'tries': 0, 'n': 0}
     # n_hypotheses, most, tmp, out = 0, None, None, None  # Add these variables
@@ -35,7 +34,7 @@ def km(t):
                 print(f'For k = {k} and m = {m}, accuracy is {accuracy:.2f}%')
 
 
-                    # Update best combination if the current accuracy is higher
+                # Update best combination if the current accuracy is higher
                 if accuracy > best_accuracy:
                     best_accuracy = accuracy
                     best_k, best_m = k, m
