@@ -3,7 +3,8 @@ from num import NUM
 from sym import SYM
 from cols import COLS
 from utils import *;
-
+import math
+import random
 '''
 Lua Code:
     local DATA=is"DATA"
@@ -63,3 +64,45 @@ class DATA:
                 statistics[f"{col.txt}"] = int(mode) if type(mode) == float else mode
 
         return statistics
+
+
+    def gate(self, budget0, budget, some):
+        rows = self.rows[:]
+        random.shuffle(rows)
+        lite = rows[:budget0]
+        dark = rows[budget0:]
+
+        stats = []
+        bests = []
+
+        for _ in range(budget):
+            best, rest = self.best_rest(lite, len(lite) ** some)
+            todo, selected = self.split(best, rest, lite, dark)
+            stats.append(selected.mid())
+            bests.append(best.rows[0])
+            lite.append(dark.pop(todo))
+
+        return stats, bests
+
+    def split(self, best, rest, lite, dark):
+        selected = DATA(self.cols_names, [])
+        max_val = 1E30
+        out = 1
+
+        for i, row in enumerate(dark, 1):
+            b = row.like(best, len(lite), 2)
+            r = row.like(rest, len(lite), 2)
+            if b > r:
+                selected.add(row)
+
+            tmp = abs(b + r) / abs(b - r + 1E-300)
+            if tmp > max_val:
+                out, max_val = i, tmp
+
+        return out, selected
+
+    def best_rest(self, rows, want):
+        rows.sort(key=lambda row: row.d2h())
+        best = rows[:want]
+        rest = rows[want:]
+        return DATA(self.cols_names, best), DATA(self.cols_names, rest)
