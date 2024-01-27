@@ -17,6 +17,7 @@ Lua Code:
     function NUM:mid() return self.mu end
 '''
 import math
+from utils import norm
 
 class NUM:
     def __init__(self, s=" ", n=0):

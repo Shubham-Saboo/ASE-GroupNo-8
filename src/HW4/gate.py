@@ -74,7 +74,8 @@ if __name__ == "__main__":
 
             print(f'The best combination is: k = {best_k}, m = {best_m}, with accuracy {best_accuracy:.2f}%')
 
-        bayes()
+        # bayes()
         print("\nThe accuracies calculated using different values of k and m are:")
-        km()
+        data.gate(4,10,0.5)
+        # km()
         

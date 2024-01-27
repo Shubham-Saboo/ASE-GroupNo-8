@@ -49,7 +49,7 @@ class DATA:
 
     def mid(self, cols=None):
         u = [col.mid() for col in (cols or self.cols.all)]
-        return ROW.new(u)
+        return ROW(u)
 
     def stats(data):
         statistics = {}
@@ -76,16 +76,19 @@ class DATA:
         bests = []
 
         for _ in range(budget):
-            best, rest = self.best_rest(lite, len(lite) ** some)
+            best, rest = self.best_rest(lite, int(round(len(lite) ** some,1)))
+            # print(best.rows,rest.rows)
+            # print(best.cells)
             todo, selected = self.split(best, rest, lite, dark)
             stats.append(selected.mid())
-            bests.append(best.rows[0])
+            # print(best.rows)
+            bests.append(best)
             lite.append(dark.pop(todo))
 
         return stats, bests
 
     def split(self, best, rest, lite, dark):
-        selected = DATA(self.cols_names, [])
+        selected = DATA(self.cols.names, [])
         max_val = 1E30
         out = 1
 
@@ -102,7 +105,11 @@ class DATA:
         return out, selected
 
     def best_rest(self, rows, want):
-        rows.sort(key=lambda row: row.d2h())
+        rows.sort(key=lambda row: row.d2h(self))
+        # print(len(rows),want)
+        best,rest = ROW(self.cols.names), ROW(self.cols.names)
+        
         best = rows[:want]
+        # print(len(best))
         rest = rows[want:]
-        return DATA(self.cols_names, best), DATA(self.cols_names, rest)
+        return DATA(best), DATA(rest)

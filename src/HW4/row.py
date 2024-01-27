@@ -19,7 +19,8 @@ class ROW:
             v = self.cells[col.at]
             if v != "?":
                 inc = col.like(v, prior)
-                out += math.log(inc)
+                if inc>0:
+                    out += math.log(inc)
 
         return math.exp(1) ** out
     
@@ -39,9 +40,9 @@ class ROW:
 
         return out, most
 
-    def d2h(self, data, d, n):
+    def d2h(self, data):
         d, n = 0, 0
         for col in data.cols.y:
             n += 1
-            d += (col.heaven - col.norm(self.cells[col.at])) ** 2
+            d += (col.heaven - norm(self.cells[col.at])) ** 2
         return math.sqrt(d) / math.sqrt(n)
