@@ -1,9 +1,5 @@
 import sys, ast, math, re, random, time
 
-def norm(mu=None, sd=None):
-    R = random.random
-    return (mu or 0) + (sd or 1) * math.sqrt(-2 * math.log(R())) * math.cos(2 * math.pi * R())
-
 def coerce(s):
     def fun(s2):
         return None if s2 == "null" else s2.lower() == "true" or (s2.lower() != "false" and s2)

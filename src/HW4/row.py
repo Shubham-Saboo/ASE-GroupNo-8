@@ -5,7 +5,6 @@ Lua Code:
 
 '''
 from config import the
-from utils import norm
 import math
 class ROW:
     def __init__(self, t):
@@ -45,5 +44,5 @@ class ROW:
         d, n = 0, 0
         for col in data.cols.y:
             n += 1
-            d += abs(col.heaven - norm(self.cells[col.at])) ** 2
+            d += abs(col.heaven - col.norm(self.cells[col.at])) ** 2
         return math.sqrt(d) / math.sqrt(n)
