@@ -97,7 +97,7 @@ class DATA:
                 y_val = list(map(coerce, row.cells[-3:]))
                 y_values_sum = [sum(x) for x in zip(y_values_sum, y_val)]
             num_rows = len(selected_rows_rand)
-            y_values_centroid = [val / num_rows for val in y_values_sum]
+            y_values_centroid = [round(val / num_rows,2) for val in y_values_sum]
 
             DATA.list_4.append(f"4: rand:{y_values_centroid}")
 

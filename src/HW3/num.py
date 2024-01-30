@@ -40,7 +40,7 @@ class NUM:
             self.hi = max(x, self.hi)
 
     def mid(self):
-        return self.mu
+        return round(self.mu,2)
 
     def div(self):
         return 0 if self.n < 2 else (self.m2 / (self.n - 1)) ** 0.5
