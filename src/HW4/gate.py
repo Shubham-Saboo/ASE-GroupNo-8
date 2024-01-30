@@ -11,12 +11,17 @@ if __name__ == "__main__":
     else:
         ts = Test()
         tests = {
-            'coerce': ts.test_coerce_with_loop,
-            'cells': ts.test_cells_random_data,
-            'round': ts.test_round_various_numbers,
-            'num_mid': ts.test_add_and_mid_num,
-            'sym_mid': ts.test_add_and_mid_sym
-        }
+    'coerce': ts.test_coerce_with_loop,
+    'cells': ts.test_cells_random_data,
+    'round': ts.test_round_various_numbers,
+    'num_mid': ts.test_add_and_mid_num,
+    'sym_mid': ts.test_add_and_mid_sym,
+    'div_sym': ts.test_div_sym,
+    'div_num': ts.test_div_num,
+    'sym_like_different': ts.test_sym_like_different,
+    'set_random_seed': ts.test_set_random_seed
+}
+
         if(the['run_tc'] == "" or the['run_tc'] is None):
             pass
         elif the['run_tc'] == "all":

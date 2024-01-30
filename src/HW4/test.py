@@ -5,11 +5,12 @@ import random
 from num import NUM
 from sym import SYM
 from data import DATA
-from utils import coerce, settings, cells, csv, round
+from utils import coerce, cells, round, set_random_seed
 import os
 import platform
+import math, unittest
 
-class Test:
+class Test(unittest.TestCase):
 
     def test_coerce_with_loop(self):
         values_to_test = [("100", 100), ("3.14", 3.14), 
@@ -40,7 +41,40 @@ class Test:
         for x in ["a","a","a","b","b","c","d"]:
             sym_obj.add(x)
         return sym_obj.mid() == "a"
+    
+    def test_div_sym(self):
+        sym_obj = SYM()
+        sym_obj.add("a")
+        sym_obj.add("b")
+        sym_obj.add("a")
+        sym_obj.add("c")
+        assert math.isclose(sym_obj.div(), 1.5)
+    
+    def test_div_num(self):
+        num_obj = NUM()
+        num_obj.add(5)
+        num_obj.add(10)
+        assert num_obj.div() == (12.5 / 1)**0.5 
+    
+    def test_sym_like_different(self):
+        test_sym = SYM()
+        test_sym.add("X")
+        test_sym.add("Y")
+        test_sym.add("Z")
+        test_sym.add("X")
+        test_sym.add("Y")
+        x = "Y"
+        prior = 0.2
+        result = test_sym.like(x, prior)
+        expected_result = ((2) + 0.00001 * 0.2) / (5 + 0.00001)
+        self.assertTrue(math.isclose(result, expected_result, abs_tol=0.0572))
 
+    def test_set_random_seed(self):
+        seed = set_random_seed()
+        self.assertIsInstance(seed, int)
+        self.assertGreaterEqual(seed, 0) 
+        self.assertLessEqual(seed, 9999999) 
+    
     def _run_test(self, test_func, test_name):
         try:
             test_func()
@@ -52,8 +86,8 @@ class Test:
         test_functions = [func for func in dir(self) if func.startswith('test_') and callable(getattr(self, func))]
         for test_func_name in test_functions:
             test_func = getattr(self, test_func_name)
-            self._run_test(test_func, test_func_name)        
-
+            self._run_test(test_func, test_func_name)
+            
 def set_environment_variable(variable_name, value):
     system_platform = platform.system()
     if system_platform == "Windows":
@@ -62,5 +96,6 @@ def set_environment_variable(variable_name, value):
         os.system(f'export {variable_name}="{value}"')
 
 if __name__ == '__main__':
-	test = Test()
-	test.run_tests()
+    unittest.main()
+    #test = Test()
+    #test.run_tests()
