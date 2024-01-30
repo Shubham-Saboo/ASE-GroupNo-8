@@ -49,7 +49,7 @@ class DATA:
             self.cols = COLS(row)
 
     def mid(self, cols=None):
-        u = [col.mid() for col in (cols or self.cols.all)]
+        u = [round(col.mid(),2) for col in (cols or self.cols.all)]
         return ROW(u)
 
     def stats(data):
