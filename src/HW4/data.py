@@ -72,6 +72,7 @@ class DATA:
         rows = random.sample(self.rows, len(self.rows)) 
         #y values of first 6 examples in ROWS
         DATA.list_1.append(f"1. top6: {[r.cells[len(r.cells)-3:] for r in rows[:6]]}")
+        
         # y values of first 50 examples in ROWS
         DATA.list_2.append(f"2. top50:{[[r.cells[len(r.cells)-3:] for r in rows[:50]]]}")
         
@@ -90,11 +91,22 @@ class DATA:
             best, rest = self.best_rest(lite, (len(lite) ** some))
             todo, selected = self.split(best, rest, lite, dark)
             # y values of centroid of (from DARK, select BUDGET0+i rows at random)
-            DATA.list_4.append(f"4. rand:{sum(list(map(coerce, random.sample(dark, budget0+i)[0].cells[-3:])))/3}")
+            selected_rows_rand = random.sample(dark, budget0+i)
+            y_values_sum = [0.0, 0.0, 0.0]
+            for row in selected_rows_rand:
+                y_val = list(map(coerce, row.cells[-3:]))
+                y_values_sum = [sum(x) for x in zip(y_values_sum, y_val)]
+            num_rows = len(selected_rows_rand)
+            y_values_centroid = [val / num_rows for val in y_values_sum]
+
+            DATA.list_4.append(f"4: rand:{y_values_centroid}")
+
             # y values of centroid of SELECTED
             DATA.list_5.append(f"5. mid: {selected.mid().cells[len(selected.mid().cells)-3:]}")
+
             # y values of first row in BEST
             DATA.list_6.append(f"6. top: {best.rows[0].cells[len(best.rows[0].cells)-3:]}")
+
             stats.append(selected.mid())
             bests.append(best.rows[0])
             lite.append(dark.pop(todo))
