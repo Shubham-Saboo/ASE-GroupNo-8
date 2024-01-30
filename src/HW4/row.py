@@ -16,11 +16,12 @@ class ROW:
         out = math.log(prior)
 
         for col in data.cols.x:
-            v = self.cells[col.at]
-            if v != "?":
-                inc = col.like(v, prior)
-                if inc>0:
-                    out += math.log(inc)
+           v = self.cells[col.at]
+           if v != "?":
+               inc = col.like(v, prior)
+               if inc<=0:
+                   return 0
+               out += math.log(inc)
 
         return math.exp(1) ** out
     

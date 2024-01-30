@@ -1,4 +1,4 @@
-import sys, ast, math, re, random
+import sys, ast, math, re, random, time
 
 def norm(mu=None, sd=None):
     R = random.random
@@ -55,3 +55,7 @@ def round(n, nPlaces = 2):
         return n
     mult = 10**nPlaces
     return math.floor(float(n)*mult + 0.5) / mult 
+
+def set_random_seed():
+        seed = int(re.sub(r'[^0-9]', '', str(time.time())[-7:]))
+        return seed
