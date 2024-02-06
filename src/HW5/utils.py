@@ -55,3 +55,9 @@ def round(n, nPlaces = 2):
 def set_random_seed():
         seed = int(re.sub(r'[^0-9]', '', str(time.time())[-7:]))
         return seed
+
+def keysort(t, fun):
+    u = [{'x': x, 'y': fun(x)} for x in t]
+    u.sort(key=lambda a: a['y'])
+    v = [xy['x'] for xy in u]
+    return v

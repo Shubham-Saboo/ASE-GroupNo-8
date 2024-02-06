@@ -33,7 +33,7 @@ class NUM:
         if x == "?" and y == "?":
             return 1
 
-        x, y = NUM.norm(self, x), NUM.norm(self, y)
+        x, y = self.norm(x), self.norm(y)
 
         if x == "?":
             x = 1 if y < 0.5 else 0

@@ -1,5 +1,7 @@
 from config import the
+from utils import keysort
 import math
+
 class ROW:
     def __init__(self, t):
         self.cells = t
@@ -11,17 +13,12 @@ class ROW:
             d += abs(col.heaven - col.norm(self.cells[col.at])) ** p
         return math.sqrt(d) / math.sqrt(n)
 
-    def dist(self, other, data, p):
+    def dist(self, other, data):
         d, n, p = 0, 0, 2
         for col in data.cols.x:
             n += 1
-            d += data.cols.all[col.at].dist(self.cells[col.at], other.cells[col.at]) ** p
+            d += col.dist(self.cells[col.at], other.cells[col.at]) ** p
         return (d / n) ** (1 / p)
 
-    def neighbor_key(self, row, data):
-        return row.dist(self, data, 2)
-
     def neighbors(self, data, rows=None):
-        if rows is None:
-            rows = data.rows
-        return sorted(rows, key=lambda row: self.neighbor_key(row, data))
+        return keysort(rows or data.rows, lambda row: self.dist(row, data))

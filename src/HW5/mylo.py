@@ -37,11 +37,13 @@ if __name__ == "__main__":
 
         file_path = the['file']
         data = DATA(file_path)
+
+        # Task 1: Get distance working
         first_row = data.rows[0]
-        print(first_row.cells)
-        sorted_rows = first_row.neighbors(data, data.rows)
+        sorted_rows = first_row.neighbors(data)
 
         for i in range(0, len(sorted_rows), 30):
             current_row = sorted_rows[i]
-            distance = first_row.dist(current_row, data, 2)
-            print("{:<7} {:<30} {:<10}".format(i + 1, ', '.join(map(str, current_row.cells)), round(distance, 2)))
+            distance = first_row.dist(current_row, data)
+
+            print("{:<7} {:<50} {:<10}".format(i + 1, ', '.join(map(str, current_row.cells)), round(distance, 2)))

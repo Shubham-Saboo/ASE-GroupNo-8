@@ -29,4 +29,4 @@ class SYM:
         return 0
 
     def dist(self, x, y):
-        return 1 if (x == "?" and y == "?") or (x == y) else 0
+        return 1 if (x == "?" or y == "?") or (x != y) else 0
