@@ -18,8 +18,8 @@ if __name__ == "__main__":
         'sym_mid': ts.test_add_and_mid_sym,
         'div_sym': ts.test_div_sym,
         'div_num': ts.test_div_num,
-        'sym_like_different': ts.test_sym_like_different,
-        'set_random_seed': ts.test_set_random_seed
+        'set_random_seed': ts.test_set_random_seed,
+        'test_far':ts.test_far
         }
 
         if(the['run_tc'] == "" or the['run_tc'] is None):

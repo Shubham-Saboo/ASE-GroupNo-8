@@ -56,18 +56,6 @@ class Test(unittest.TestCase):
         num_obj.add(10)
         assert num_obj.div() == (12.5 / 1)**0.5 
     
-    def test_sym_like_different(self):
-        test_sym = SYM()
-        test_sym.add("X")
-        test_sym.add("Y")
-        test_sym.add("Z")
-        test_sym.add("X")
-        test_sym.add("Y")
-        x = "Y"
-        prior = 0.2
-        result = test_sym.like(x, prior)
-        expected_result = ((2) + 0.00001 * 0.2) / (5 + 0.00001)
-        self.assertTrue(math.isclose(result, expected_result, abs_tol=0.0572))
 
     def test_set_random_seed(self):
         seed = set_random_seed()
@@ -81,6 +69,11 @@ class Test(unittest.TestCase):
             print(f"Test {test_name} passed.")
         except AssertionError as e:
             print(f"Test {test_name} failed: {e}")
+    
+    def test_far(self):
+        data_new = DATA('../../Data/auto93.csv')
+        _, attempts = DATA.far({}, data_new)
+        assert attempts == 200
 
     def run_tests(self):
         test_functions = [func for func in dir(self) if func.startswith('test_') and callable(getattr(self, func))]

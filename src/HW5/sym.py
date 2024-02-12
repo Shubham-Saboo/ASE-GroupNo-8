@@ -19,6 +19,9 @@ class SYM:
 
     def mid(self):
         return self.mode
+    
+    def like(self, x, prior):
+        return ((self.has.get(x, 0) or 0) + self.the['m'] * prior) / (self.n + self.the['m'])
           
     def div(self, e=0):
         for v in self.has.values():
