@@ -97,5 +97,5 @@ def set_environment_variable(variable_name, value):
 
 if __name__ == '__main__':
     unittest.main()
-    #test = Test()
-    #test.run_tests()
+    test = Test()
+    test.run_tests()

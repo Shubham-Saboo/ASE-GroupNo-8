@@ -1,6 +1,6 @@
 from utils import *
 from data import DATA
-from config import help_str, the
+from config import help_str,the
 from test import Test
 
 if __name__ == "__main__":
@@ -38,7 +38,7 @@ if __name__ == "__main__":
         file_path = the['file']
         data = DATA(file_path)
 
-        # Task 1: Get distance working
+        print("Task 1: Get distance working\n")
         first_row = data.rows[0]
         sorted_rows = first_row.neighbors(data)
 
@@ -47,3 +47,7 @@ if __name__ == "__main__":
             distance = first_row.dist(current_row, data)
 
             print("{:<7} {:<50} {:<10}".format(i + 1, ', '.join(map(str, current_row.cells)), round(distance, 2)))
+    
+
+    data_new = DATA(the['file'])
+    DATA.far(the, data_new)
