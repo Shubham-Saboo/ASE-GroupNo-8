@@ -61,3 +61,27 @@ def keysort(t, fun):
     u.sort(key=lambda a: a['y'])
     v = [xy['x'] for xy in u]
     return v
+
+def any_item(t):
+    return random.choice(t)
+
+def many(t, n=None):
+    n = n or len(t)
+    u = [random.choice(t) for _ in range(n)]
+    return u
+
+def o(t, n=None, u=None):
+    if isinstance(t, (int, float)):
+        return str(round(t, n))
+    if not isinstance(t, dict):
+        return str(t)
+
+    u = []
+    for k, v in t.items():
+        if str(k)[0] != "_":
+            if len(t) > 0:
+                u.append(o(v, n))
+            else:
+                u.append(f"%s: %s", o(k, n), o(v, n))
+
+    return "{" + ", ".join(u) + "}"
