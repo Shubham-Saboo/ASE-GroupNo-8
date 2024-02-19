@@ -17,14 +17,16 @@ class DATA:
             for _, x in csv(src):
                 self.add(x, fun)
         else:
-            self.add(src, fun)
+            for row in src:
+                self.add(row, fun)
 
     def add(self, t, fun=None):
         row = t if isinstance(t, ROW) else ROW(t)
         if self.cols:
             if fun:
                 fun(self, row)
-            self.rows.append(self.cols.add(row))
+            self.cols.add(row)
+            self.rows.append(row)
         else:
             self.cols = COLS(row)
 
@@ -134,7 +136,13 @@ class DATA:
                 return self.clone(data.rows), self.clone(rest), evals
 
         return _branch(self)
-    
+
+    def clone(self, rows=None):
+        new = DATA()
+        for row in rows or []:
+            new.add(row)
+        return new
+
     def clone(self, rows=None, newData=None):
         newData = DATA([self.cols.names])
         for row in rows or []:
