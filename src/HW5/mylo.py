@@ -49,5 +49,9 @@ if __name__ == "__main__":
             print("{:<7} {:<50} {:<10}".format(i + 1, ', '.join(map(str, current_row.cells)), round(distance, 2)))
     
 
-    data_new = DATA(the['file'])
-    DATA.far(the, data_new)
+        data_new = DATA(the['file'])
+        DATA.far(the, data_new)
+
+        t, evals = data_new.tree(True)
+        t.show()
+        print("evals: ", evals)
