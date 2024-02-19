@@ -38,20 +38,34 @@ if __name__ == "__main__":
         file_path = the['file']
         data = DATA(file_path)
 
-        print("Task 1: Get distance working\n")
-        first_row = data.rows[0]
-        sorted_rows = first_row.neighbors(data)
+        # print("Task 1: Get distance working\n")
+        # first_row = data.rows[0]
+        # sorted_rows = first_row.neighbors(data)
 
-        for i in range(0, len(sorted_rows), 30):
-            current_row = sorted_rows[i]
-            distance = first_row.dist(current_row, data)
+        # for i in range(0, len(sorted_rows), 30):
+        #     current_row = sorted_rows[i]
+        #     distance = first_row.dist(current_row, data)
 
-            print("{:<7} {:<50} {:<10}".format(i + 1, ', '.join(map(str, current_row.cells)), round(distance, 2)))
+        #     print("{:<7} {:<50} {:<10}".format(i + 1, ', '.join(map(str, current_row.cells)), round(distance, 2)))
     
 
         data_new = DATA(the['file'])
-        DATA.far(the, data_new)
+        # DATA.far(the, data_new)
 
-        t, evals = data_new.tree(True)
-        t.show()
-        print("evals: ", evals)
+        # print("Task 1: Implementing the recursive tree\n")
+        # t, evals = data_new.tree(True)
+        # t.show()
+        # print("evals: ", evals)
+
+        # print("Task 2: Optimization output - Single Descent\n")
+        # best, rest, evals = data_new.branch()
+        # print("centroid of output cluster: ")
+        # print(o(best.mid().cells), o(rest.mid().cells))
+        # print("evals: ", evals)
+
+        print("Task 3: doubletap\n")
+        best1, rest, evals1 = data_new.branch(32)
+        best2, _, evals2 = best1.branch(4)
+        print("median and best found in that four: ")
+        print(o(best2.mid().cells), o(rest.mid().cells))
+        print("evals: ",evals1 + evals2)
