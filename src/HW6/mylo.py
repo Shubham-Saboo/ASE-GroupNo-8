@@ -58,16 +58,16 @@ if __name__ == "__main__":
     
         print("date : {} \nfile : {} \nrepeat : {} \nseed : {} \nrows : {} \ncols : {}".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S"),the['file'],"20",the['seed'],len(data_new.rows), len(data_new.rows[0].cells)))
         print("names : \t{}\t\t{}".format(d.cols.names,"D2h-"))
-        print("mid : \t\t{}\t\t\t\t\t\t{}".format(list(full_mid[0].values())[1:],full_mid[1]))
-        print("div : \t\t{}\t\t\t\t\t\t\t\t{}".format(list(full_div[0].values())[1:],full_div[1]))
+        print("mid : \t\t{}\t\t\t\t{}".format(list(full_mid[0].values())[1:],full_mid[1]))
+        print("div : \t\t{}\t\t\t\t\t{}".format(list(full_div[0].values())[1:],full_div[1]))
         print("#")
         smo_output = sorted(smo_output, key=lambda x: x[1])
         for op in smo_output:
-            print("smo9\t\t{}\t\t\t\t\t\t\t{}\n".format(op[0],op[1]))
+            print("smo9\t\t{}\t\t\t\t{}\n".format(op[0],op[1]))
         print("#")
         any50_output = sorted(any50_output, key=lambda x: x[1])
         for op in any50_output:
-            print("any50\t\t{}\t\t\t\t\t\t\t{}\n".format(op[0],op[1]))
+            print("any50\t\t{}\t\t\t\t{}\n".format(op[0],op[1]))
         print("#")
-        print("100%\t\t{}\t\t\t\t\t\t\t{}".format(best[0],best[1]))
+        print("100%\t\t{}\t\t\t\t{}".format(best[0],best[1]))
 
