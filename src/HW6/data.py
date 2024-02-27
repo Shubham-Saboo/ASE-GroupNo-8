@@ -7,6 +7,7 @@ from config import the
 from Node import NODE;
 import math
 import random
+import numpy as np
 
 class DATA:
 
@@ -17,8 +18,7 @@ class DATA:
             for _, x in csv(src):
                 self.add(x, fun)
         else:
-            for row in src:
-                self.add(row, fun)
+            self.add(src, fun)
 
     def add(self, t, fun=None):
         row = t if isinstance(t, ROW) else ROW(t)
@@ -53,8 +53,8 @@ class DATA:
 
     list_1, list_2, list_3, list_4, list_5, list_6 = [[] for _ in range(6)]
 
-    def gate(self, budget0, budget, some):
-        random.seed(set_random_seed())
+    def gate(self, random_seed, budget0, budget, some):
+        random.seed(random_seed)
         rows = random.sample(self.rows, len(self.rows)) 
         #y values of first 6 examples in ROWS
         DATA.list_1.append(f"1. top6: {[r.cells[len(r.cells)-3:] for r in rows[:6]]}")
@@ -98,12 +98,21 @@ class DATA:
             lite.append(dark.pop(todo))
         return stats, bests, [bests[-1].cells, round(bests[-1].d2h(self),2)]
 
-
     def stats_div(self, fun=None, ndivs=None):
-        u = {".N": len(self.rows)}
+        u = {}
         for col in self.cols.all:
-            u[col.txt] = round(col.div() if isinstance(col, SYM) else col.div())
+            if(isinstance(col, SYM)):
+                if(col.txt == "origin"):
+                    u[col.txt] = round(col.div(),2)
+                else:
+                    u[col.txt] = col.div()
+            else:
+                u[col.txt] = round(col.div(),2)
         return u
+
+    def mid_div(self):
+        d2h_vals = [r.d2h(self) for r in self.rows]
+        return[[self.stats(), round(np.mean(d2h_vals),2)],[self.stats_div(), round(np.std(d2h_vals),2)]]
 
     def split(self, best, rest, lite, dark):
         selected = DATA(self.cols.names, [])

@@ -2,6 +2,7 @@ from utils import *
 from data import DATA
 from config import help_str,the
 from test import Test
+from datetime import datetime
 
 if __name__ == "__main__":
     the = settings(help_str)
@@ -37,35 +38,36 @@ if __name__ == "__main__":
 
         file_path = the['file']
         data = DATA(file_path)
-
-        # print("Task 1: Get distance working\n")
-        # first_row = data.rows[0]
-        # sorted_rows = first_row.neighbors(data)
-
-        # for i in range(0, len(sorted_rows), 30):
-        #     current_row = sorted_rows[i]
-        #     distance = first_row.dist(current_row, data)
-
-        #     print("{:<7} {:<50} {:<10}".format(i + 1, ', '.join(map(str, current_row.cells)), round(distance, 2)))
-    
-
+        
         data_new = DATA(the['file'])
-        # DATA.far(the, data_new)
+        full_mid, full_div = data_new.mid_div()
+        # print(full_mid, full_div)
 
-        # print("Task 1: Implementing the recursive tree\n")
-        # t, evals = data_new.tree(True)
-        # t.show()
-        # print("evals: ", evals)
+        smo_output = []
+        any50_output = []
 
-        # print("Task 2: Optimization output - Single Descent\n")
-        # best, rest, evals = data_new.branch()
-        # print("centroid of output cluster: ")
-        # print(o(best.mid().cells), o(rest.mid().cells))
-        # print("evals: ", evals)
+        budget0, budget, some = 4, 10, 0.5
+        for i in range(20):
+            random_seed = set_random_seed()
+            d = DATA(file_path) 
+            ign1, ign2, line = d.gate(random_seed, budget0, budget, some)
+            smo_output.append(line)
+            any50_output.append(d.any50(random_seed))
 
-        print("Task 3: doubletap\n")
-        best1, rest, evals1 = data_new.branch(32)
-        best2, _, evals2 = best1.branch(4)
-        print("median and best found in that four: ")
-        print(o(best2.mid().cells), o(rest.mid().cells))
-        print("evals: ",evals1 + evals2)
+        best = d.best_100(random_seed)
+    
+        print("date : {} \nfile : {} \nrepeat : {} \nseed : {} \nrows : {} \ncols : {}".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S"),the['file'],"20",the['seed'],len(data_new.rows), len(data_new.rows[0].cells)))
+        print("names : \t{}\t\t{}".format(d.cols.names,"D2h-"))
+        print("mid : \t\t{}\t\t\t\t\t\t{}".format(list(full_mid[0].values())[1:],full_mid[1]))
+        print("div : \t\t{}\t\t\t\t\t\t\t\t{}".format(list(full_div[0].values())[1:],full_div[1]))
+        print("#")
+        smo_output = sorted(smo_output, key=lambda x: x[1])
+        for op in smo_output:
+            print("smo9\t\t{}\t\t\t\t\t\t\t{}\n".format(op[0],op[1]))
+        print("#")
+        any50_output = sorted(any50_output, key=lambda x: x[1])
+        for op in any50_output:
+            print("any50\t\t{}\t\t\t\t\t\t\t{}\n".format(op[0],op[1]))
+        print("#")
+        print("100%\t\t{}\t\t\t\t\t\t\t{}".format(best[0],best[1]))
+

@@ -2,6 +2,8 @@ import math
 from config import the
 
 class SYM:
+    params = {'k': 1, 'm': 2}
+    
     def __init__(self, s=" ", n=0):
         self.txt = s
         self.at = n
@@ -21,7 +23,7 @@ class SYM:
         return self.mode
     
     def like(self, x, prior):
-        return ((self.has.get(x, 0) or 0) + self.the['m'] * prior) / (self.n + self.the['m'])
+        return ((self.has.get(x, 0) or 0) + self.params['m'] * prior) / (self.n + self.params['m'])
           
     def div(self, e=0):
         for v in self.has.values():
