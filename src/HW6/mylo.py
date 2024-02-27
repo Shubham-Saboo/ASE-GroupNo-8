@@ -63,11 +63,11 @@ if __name__ == "__main__":
         print("#")
         smo_output = sorted(smo_output, key=lambda x: x[1])
         for op in smo_output:
-            print("smo9\t\t{}\t\t\t\t{}\n".format(op[0],op[1]))
+            print("smo9\t\t{}\t\t\t\t{}".format(op[0],op[1]))
         print("#")
         any50_output = sorted(any50_output, key=lambda x: x[1])
         for op in any50_output:
-            print("any50\t\t{}\t\t\t\t{}\n".format(op[0],op[1]))
+            print("any50\t\t{}\t\t\t\t{}".format(op[0],op[1]))
         print("#")
         print("100%\t\t{}\t\t\t\t{}".format(best[0],best[1]))
 
