@@ -3,6 +3,7 @@ from data import DATA
 from config import help_str,the
 from test import Test
 from datetime import datetime
+from ranges import RANGE
 
 if __name__ == "__main__":
     the = settings(help_str)

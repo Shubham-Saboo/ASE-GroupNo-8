@@ -1,4 +1,5 @@
 import math
+from config import the
 
 class NUM:
     def __init__(self, s=" ", n=0):
@@ -48,3 +49,7 @@ class NUM:
             y = 1 if x < 0.5 else 0
 
         return abs(x - y)
+
+    def bin(self, x):
+        tmp = (self.hi - self.lo)/(the['bins']-1)
+        return 1 if self.hi == self.lo else int(x/tmp+0.5)*tmp

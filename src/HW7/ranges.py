@@ -1,6 +1,6 @@
 import numpy as np
 
-class Range:
+class RANGE:
     def __init__(self, at, txt, lo, hi=None):
         self.at = at
         self.txt = txt
@@ -27,7 +27,7 @@ class Range:
         return self._score(self.y, goal, LIKE, HATE, the=the)
 
     def merge(self, other):
-        both = Range(self.at, self.txt, self.x['lo'])
+        both = RANGE(self.at, self.txt, self.x['lo'])
         both.x['lo'] = min(self.x['lo'], other.x['lo'])
         both.x['hi'] = max(self.x['hi'], other.x['hi'])
         for t in (self.y, other.y):
