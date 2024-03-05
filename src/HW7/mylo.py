@@ -79,7 +79,7 @@ if __name__ == "__main__":
         file_path = the['file']
         d = DATA(file_path)
         
-        best, rest = d.branch()
+        best, rest, _ = d.branch()
         LIKE = best.rows
         HATE = rest.rows[:3 * len(LIKE)]
 

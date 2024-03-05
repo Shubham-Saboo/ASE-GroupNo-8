@@ -236,7 +236,7 @@ class DATA:
         return new
 
     def clone(self, rows=None, newData=None):
-        newData = DATA([self.cols.names])
+        newData = DATA(self.cols.names)
         for row in rows or []:
             newData.add(row)
         return newData
