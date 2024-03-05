@@ -101,9 +101,9 @@ if __name__ == "__main__":
         max_score = score(t[0])
 
         print("\n#scores:\n")
-        for v in t[:the['Beam']]:
+        for v in t[:int(the['Beam'])]:
             if score(v) > max_score * 0.1:
-                print(l.rnd(score(v)), l.o(v))  
+                print(round(score(v)))  
 
-        l.oo({"LIKE": len(LIKE), "HATE": len(HATE)})
+        print({"LIKE": len(LIKE), "HATE": len(HATE)})
 
