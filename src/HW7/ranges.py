@@ -1,4 +1,5 @@
 import numpy as np
+from config import the
 
 class RANGE:
     def __init__(self, at, txt, lo, hi=None):
@@ -23,8 +24,8 @@ class RANGE:
             return f"{s} == {lo}"
         return f"{lo} <= {s} < {hi}"
 
-    def score(self, goal, LIKE, HATE, the):
-        return self._score(self.y, goal, LIKE, HATE, the=the)
+    def score(self, goal, LIKE, HATE):
+        return self._score(self.y, goal, LIKE, HATE)
 
     def merge(self, other):
         both = RANGE(self.at, self.txt, self.x['lo'])
@@ -52,7 +53,7 @@ class RANGE:
         return entropy_val, total
     
     @staticmethod
-    def _score(t, goal, LIKE, HATE, the):
+    def _score(t, goal, LIKE, HATE):
         like = sum([n for klass, n in t.items() if klass == goal])
         hate = sum([n for klass, n in t.items() if klass != goal])
         tiny = 1E-30

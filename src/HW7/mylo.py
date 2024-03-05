@@ -91,14 +91,17 @@ if __name__ == "__main__":
         for col in d.cols.x:
             print("")
             for range_ in _ranges1(col, {"LIKE": LIKE, "HATE": HATE}):
-                l.oo(range_)  
+                temp_x = {'hi': range_.x['hi'], 'lo': range_.x['lo']}
+                temp_y = {key: range_.y[key] for key in ('HATE', 'LIKE') if key in range_.y}
+                d = {'at': range_.at + 1, 'scored': range_.scored, 'txt': range_.txt, 'x': temp_x, 'y': temp_y}
+                print(d)
                 t.append(range_)
 
         t.sort(key=lambda x: score(x), reverse=True)
         max_score = score(t[0])
 
         print("\n#scores:\n")
-        for v in t[:the.Beam]:
+        for v in t[:the['Beam']]:
             if score(v) > max_score * 0.1:
                 print(l.rnd(score(v)), l.o(v))  
 

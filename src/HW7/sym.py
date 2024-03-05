@@ -35,3 +35,6 @@ class SYM:
 
     def dist(self, x, y):
         return 1 if (x == "?" or y == "?") or (x != y) else 0
+
+    def bin(self, x):
+        return x

@@ -6,6 +6,8 @@ USAGE:
 
 OPTIONS:
   -b --bins     maximum number of bins          = 16
+  -B --Beam     max number of ranges            = 10
+  -S --Support  coefficient on best             = 2
   -c --cohen    small effect size               = .35
   -f --file     csv data file name              = ./data/auto93.csv
   -h --help     show help                       = False
