@@ -103,7 +103,10 @@ if __name__ == "__main__":
         print("\n#scores:\n")
         for v in t[:int(the['Beam'])]:
             if score(v) > max_score * 0.1:
-                print(round(score(v)))  
-
+                temp_x = {'hi': v.x['hi'], 'lo': v.x['lo']}
+                temp_y = {key: v.y[key] for key in ('HATE', 'LIKE') if key in v.y}
+                dv = {'at': v.at + 1, 'scored': v.scored, 'txt': v.txt, 'x': temp_x, 'y': temp_y}
+        print("{:.2f}".format(round(score(v), 2)), dv)
+ 
         print({"LIKE": len(LIKE), "HATE": len(HATE)})
 
