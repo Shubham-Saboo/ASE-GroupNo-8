@@ -68,13 +68,13 @@ if __name__ == "__main__":
                     x = row.cells[col.at]
                     if x != "?":
                         bin_ = col.bin(x)
-                        out[bin_] = out.get(bin_, RANGE(col.at, col.txt, x))
+                        out[bin_] = RANGE(col.at, col.txt, x)
                         out[bin_].add(x, y)
 
             out = list(out.values())
-            out.sort(key=lambda a: a.x.lo)
+            out.sort(key=lambda a: a.x['lo'])
 
-            return out if col.has else _mergeds(out, nrows / the.bins)
+            return out if hasattr(col, 'has') else _mergeds(out, nrows / the['bins'])
 
         file_path = the['file']
         d = DATA(file_path)

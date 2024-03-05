@@ -5,6 +5,7 @@ USAGE:
   python gate.py [OPTIONS]
 
 OPTIONS:
+  -b --bins     maximum number of bins          = 16
   -c --cohen    small effect size               = .35
   -f --file     csv data file name              = ./data/auto93.csv
   -h --help     show help                       = False
