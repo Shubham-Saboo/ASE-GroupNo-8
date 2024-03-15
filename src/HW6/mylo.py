@@ -117,7 +117,4 @@ if __name__ == "__main__":
             print("any50\t\t{}\t\t\t\t{}".format(op[0],op[1]))
         print("#")
         print("100%\t\t{}\t\t\t\t{}".format(best[0],best[1]))
-
         hw7_part2(the)
-
-       
