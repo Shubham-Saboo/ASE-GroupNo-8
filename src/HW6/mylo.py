@@ -3,6 +3,8 @@ from data import DATA
 from config import help_str,the
 from test import Test
 from datetime import datetime
+import statistics
+from stats import SAMPLE, eg0
 
 if __name__ == "__main__":
     the = settings(help_str)
@@ -71,3 +73,4 @@ if __name__ == "__main__":
         print("#")
         print("100%\t\t{}\t\t\t\t{}".format(best[0],best[1]))
 
+       
