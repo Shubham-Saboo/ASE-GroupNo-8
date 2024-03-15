@@ -9,6 +9,8 @@ from utils import coerce, cells, round, set_random_seed
 import os
 import platform
 import math, unittest
+from ranges import RANGE
+
 
 class Test(unittest.TestCase):
 
@@ -74,6 +76,18 @@ class Test(unittest.TestCase):
         data_new = DATA('../../Data/auto93.csv')
         _, attempts = DATA.far({}, data_new)
         assert attempts == 200
+    
+    def test_score(self):
+        r = RANGE(0, "test", 0, 5)
+        r.y = {'HATE': 78, 'LIKE': 26}
+        score = r.score("a", 1, 1, {"Support": 2})
+        assert score == 0
+
+    def test_merged_with_entropy(self):
+        r = RANGE(0, "test", 2, 5)
+        r2 = RANGE(1, "test2", 5, 10)
+        merged = r.merge(r2)
+        assert merged.show() == '2 <= test < 10'
 
     def run_tests(self):
         test_functions = [func for func in dir(self) if func.startswith('test_') and callable(getattr(self, func))]
