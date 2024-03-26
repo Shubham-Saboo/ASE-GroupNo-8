@@ -9,6 +9,8 @@ OPTIONS:
   -B --Beam     max number of ranges            = 10
   -S --Support  coefficient on best             = 2
   -c --cohen    small effect size               = .35
+  -d --d        first cut                       = 32
+  -D --D        second cut                      = 4
   -f --file     csv data file name              = ./data/auto93.csv
   -h --help     show help                       = False
   -k --k        low class frequency kludge      = 1
