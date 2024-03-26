@@ -102,3 +102,10 @@ def shuffle(t):
         j = random.randint(0, i)
         u[i], u[j] = u[j], u[i]
     return u
+
+def powerset(s):
+    t = [[]]
+    for i in range(len(s)):
+        for j in range(len(t)):
+            t.append([s[i]] + t[j])
+    return t

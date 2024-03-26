@@ -9,6 +9,7 @@ OPTIONS:
   -B --Beam     max number of ranges            = 10
   -S --Support  coefficient on best             = 2
   -c --cohen    small effect size               = .35
+  -C --Cut      ignore ranges less than C*max   = .1
   -d --d        first cut                       = 32
   -D --D        second cut                      = 4
   -f --file     csv data file name              = ./data/auto93.csv
