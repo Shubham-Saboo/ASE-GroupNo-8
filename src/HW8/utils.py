@@ -95,3 +95,10 @@ def slice(t, go=None, stop=None, inc=None):
     for j in range((go or 1)//1, (stop or len(t))//1, (inc or 1)//1):
         u.append(t[j])
     return u
+
+def shuffle(t):
+    u = t.copy()
+    for i in range(len(u) - 1, 0, -1):
+        j = random.randint(0, i)
+        u[i], u[j] = u[j], u[i]
+    return u

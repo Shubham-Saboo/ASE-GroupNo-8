@@ -85,3 +85,20 @@ def o(t, n=None, u=None):
                 u.append(f"%s: %s", o(k, n), o(v, n))
 
     return "{" + ", ".join(u) + "}"
+
+def slice(t, go=None, stop=None, inc=None):
+    if go is not None and go < 0:
+        go = len(t) + go
+    if stop is not None and stop < 0:
+        stop = len(t) + stop
+    u = []
+    for j in range((go or 1)//1, (stop or len(t))//1, (inc or 1)//1):
+        u.append(t[j])
+    return u
+
+def shuffle(t):
+    u = t.copy()
+    for i in range(len(u) - 1, 0, -1):
+        j = random.randint(0, i)
+        u[i], u[j] = u[j], u[i]
+    return u

@@ -73,39 +73,75 @@ if __name__ == "__main__":
             t[-1].x['hi'] = math.inf
             return t
 
+        def eg_rules(the):
+            for _ in range(1, 2):
+                d = DATA(the['file'], the=the)
+                best0, rest, evals1 = d.branch(the['d'])
+                best, _, evals2 = best0.branch(the['D'])
+                # print(evals1 + evals2 + the['D']- 1)
+                LIKE = best.rows
+                HATE = slice(shuffle(rest.rows), 1, 3 * len(LIKE))
+                rowss = {'LIKE': LIKE, 'HATE': HATE}
+                for i, rule in enumerate(RULES(_ranges(d.cols.x, rowss, the), "LIKE", rowss,the=the).sorted):
+                    result = d.clone(rule.selects(rest.rows))
+                    if len(result.rows) > 0:
+                        result.rows.sort(key=lambda row: row.d2h(d))
+                        print(round(rule.scored), o(result.mid().cells), "\t", rule.show())
+
+        
+        # d = DATA(the['file'])
+        # best, rest, _ = d.branch()
+        # LIKE = best.rows
+        # HATE = slice(random.sample(rest.rows, min(3 * len(LIKE), len(rest.rows))))
+        # def score(range_):
+        #     return range_.score("LIKE", len(LIKE), len(HATE))
+        # print()
+        # print("PART - 1")
+        # t = []
+        # for col in list(d.cols.x):
+        #     print("")
+        #     for range_ in _ranges1(col, {"LIKE": LIKE, "HATE": HATE}):
+        #         temp_x = {'hi':range_.x['hi'], 'lo':range_.x['lo']}
+        #         temp_y = {}
+        #         if 'HATE' in range_.y:
+        #             temp_y['HATE'] = range_.y['HATE']
+        #         if 'LIKE' in range_.y:
+        #             temp_y['LIKE'] = range_.y['LIKE']
+        #         d = {'at':(range_.at)+1, 'scored':range_.scored, 'txt':range_.txt, 'x':temp_x, 'y':temp_y}
+        #         print(d)
+        #         t.append(range_)
+        # t.sort(key=lambda a: score(a), reverse=True)
+        # max_score = score(t[0])
+        # print("\n\nPART - 2")
+        # print("\n#scores:\n")
+        # for v in t[:int(the['Beam'])]:
+        #     if score(v) > max_score * 0.1:
+        #         temp_x = {'hi':v.x['hi'], 'lo':v.x['lo']}
+        #         temp_y = {}
+        #         if 'HATE' in v.y:
+        #             temp_y['HATE'] = v.y['HATE']
+        #         if 'LIKE' in v.y:
+        #             temp_y['LIKE'] = v.y['LIKE']
+        #         d_v = {'at':(v.at)+1, 'scored':v.scored, 'txt':v.txt, 'x':temp_x, 'y':temp_y}
+        #         print("{:.2f}".format(round(score(v), 2)), d_v)
+        # print({"HATE": len(HATE),"LIKE": len(LIKE),})
+
         d = DATA(the['file'])
-        best, rest, _ = d.branch()
+        tmp = shuffle(d.rows)
+        train = d.clone(tmp[:len(tmp) // 2])
+        test = d.clone(tmp[len(tmp) // 2:])
+        test.rows.sort(key=lambda row: row.d2h(d))
+        test.rows = shuffle(test.rows)
+        best0, rest, evals1 = train.branch(the['d'])
+        best, _, evals2 = best0.branch(the['D'])
         LIKE = best.rows
-        HATE = slice(random.sample(rest.rows, min(3 * len(LIKE), len(rest.rows))))
-        def score(range_):
-            return range_.score("LIKE", len(LIKE), len(HATE))
-        print()
-        print("PART - 1")
-        t = []
-        for col in list(d.cols.x):
-            print("")
-            for range_ in _ranges1(col, {"LIKE": LIKE, "HATE": HATE}):
-                temp_x = {'hi':range_.x['hi'], 'lo':range_.x['lo']}
-                temp_y = {}
-                if 'HATE' in range_.y:
-                    temp_y['HATE'] = range_.y['HATE']
-                if 'LIKE' in range_.y:
-                    temp_y['LIKE'] = range_.y['LIKE']
-                d = {'at':(range_.at)+1, 'scored':range_.scored, 'txt':range_.txt, 'x':temp_x, 'y':temp_y}
-                print(d)
-                t.append(range_)
-        t.sort(key=lambda a: score(a), reverse=True)
-        max_score = score(t[0])
-        print("\n\nPART - 2")
-        print("\n#scores:\n")
-        for v in t[:int(the['Beam'])]:
-            if score(v) > max_score * 0.1:
-                temp_x = {'hi':v.x['hi'], 'lo':v.x['lo']}
-                temp_y = {}
-                if 'HATE' in v.y:
-                    temp_y['HATE'] = v.y['HATE']
-                if 'LIKE' in v.y:
-                    temp_y['LIKE'] = v.y['LIKE']
-                d_v = {'at':(v.at)+1, 'scored':v.scored, 'txt':v.txt, 'x':temp_x, 'y':temp_y}
-                print("{:.2f}".format(round(score(v), 2)), d_v)
-        print({"HATE": len(HATE),"LIKE": len(LIKE),})
+        HATE = slice(shuffle(rest.rows), 1, 3 * len(LIKE))
+        rowss = {'LIKE': LIKE, 'HATE': HATE}
+        test.rows = shuffle(test.rows)
+        random = test.clone(slice(test.rows, 1, int(evals1 + evals2 + the['D'] - 1)))
+        random.rows.sort(key=lambda row: row.d2h(d))
+        for i, rule in enumerate(RULES(_ranges(train.cols.x, rowss, the), "LIKE", rowss, the=the).sorted):
+            result = train.clone(rule.selects(test.rows))
+            if len(result.rows) > 0:
+                result.rows.sort(key=lambda row: row.d2h(d))
+                print(round(rule.scored), o(result.mid().cells), "\t", rule.show())
