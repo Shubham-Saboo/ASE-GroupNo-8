@@ -4,6 +4,7 @@ from config import help_str,the
 from test import Test
 from datetime import datetime
 from ranges import RANGE
+from rules import Rules
 
 if __name__ == "__main__":
     the = settings(help_str)
@@ -36,6 +37,13 @@ if __name__ == "__main__":
                 print(f"Test {the['run_tc']} passed.")
             except AssertionError as e:
                 print(f"Test {the['run_tc']} failed: {e}")
+        
+        def _ranges(cols, rowss):
+            t = []
+            for col in cols:
+                for range in _ranges1(col, rowss):
+                    t.append(range)
+            return t
 
         def _ranges1(col, rowss):
             out, nrows = {}, 0
@@ -72,19 +80,8 @@ if __name__ == "__main__":
             t[-1].x['hi'] = math.inf
             return t
 
-        def eg_rules(the):
-            for _ in range(1, 2):
-                d = DATA(the['file'], the=the)
-                best0, rest, evals1 = d.branch(the['d'])
-                best, _, evals2 = best0.branch(the['D'])
-                LIKE = best.rows
-                HATE = slice(shuffle(rest.rows), 1, 3 * len(LIKE))
-                rowss = {'LIKE': LIKE, 'HATE': HATE}
-                for i, rule in enumerate(RULES(_ranges(d.cols.x, rowss, the), "LIKE", rowss,the=the).sorted):
-                    result = d.clone(rule.selects(rest.rows))
-                    if len(result.rows) > 0:
-                        result.rows.sort(key=lambda row: row.d2h(d))
-                        print(round(rule.scored), o(result.mid().cells), "\t", rule.show())
+        print("score    mid selected                                          rule")
+        print("-----   --------------------------------------------------     ------")
 
         d = DATA(the['file'])
         tmp = shuffle(d.rows)
@@ -100,3 +97,8 @@ if __name__ == "__main__":
         test.rows = shuffle(test.rows)
         random = test.clone(slice(test.rows, 1, int(evals1 + evals2 + the['D'] - 1)))
         random.rows.sort(key=lambda row: row.d2h(d))
+        for i, rule in enumerate(Rules(_ranges(train.cols.x, rowss), "LIKE", rowss).sorted):
+            result = train.clone(rule.selects(test.rows))
+            if len(result.rows) > 0:
+                result.rows.sort(key=lambda row: row.d2h(d))
+                print(round(rule.scored), "\t", o(result.mid().cells), "\t", rule.show())

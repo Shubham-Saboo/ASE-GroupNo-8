@@ -1,4 +1,6 @@
 from utils import powerset
+from rule import Rule
+from config import the
 
 class Rules:
     def __init__(self, ranges, goal, rowss):
@@ -21,14 +23,26 @@ class Rules:
                 self.HATE += len(rows)
 
     def score(self, t):
-        return l.score(t, self.goal, self.LIKE, self.HATE)
+        return self._score(t, self.goal, self.LIKE, self.HATE)
+
+    def _score(self, t, goal, LIKE, HATE):
+        like = sum([n for klass, n in t.items() if klass == goal])
+        hate = sum([n for klass, n in t.items() if klass != goal])
+        tiny = 1E-30
+        like /= (LIKE + tiny)
+        hate /= (HATE + tiny)
+        return like ** the["Support"] / (like + hate) if hate <= like else 0
 
     def _try(self, ranges):
         u = []
         for subset in powerset(ranges):
             if len(subset) > 0:
                 rule = Rule(subset)
-                rule.scored = self.score(rule.selectss(self.rowss))
+                y_preds = rule.selectss(self.rowss)
+                if(y_preds["LIKE"]==0 and y_preds["HATE"]==0):
+                    rule.scored = 0
+                else:
+                    rule.scored = self.score(y_preds)
                 if rule.scored > 0.01:
                     u.append(rule)
         return u
